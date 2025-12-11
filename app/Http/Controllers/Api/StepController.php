@@ -21,25 +21,33 @@ class StepController extends Controller
     }
     public function store(StoreStepRequest $request)
     {
-        $requestData = $request->validated();
 
-        $step = $this->stepService->handleStore(
-            $requestData['recruiter_id'],
-            $requestData['timeline_id'],
-            $requestData['step_category_id']
-        );
+        try {
+            $requestData = $request->validated();
 
-        $status = $this->statusService->handleStore(
-            $requestData['recruiter_id'],
-            $step->id,
-            $requestData['status_category_id'],
-        );
+            $step = $this->stepService->handleStore(
+                $requestData['recruiter_id'],
+                $requestData['timeline_id'],
+                $requestData['step_category_id']
+            );
 
-        // For now, just return the validated data
-        return response()->json([
-            'message' => 'Step and Status created successfully.',
-            'step' => $step->only(['id', 'recruiter_id', 'timeline_id'])+['step_category'=>$step->category->name],
-            'status' => $status->only(['id', 'recruiter_id', 'step_id'])+['status_category'=>$status->category->name],
-        ], 201);
+            $status = $this->statusService->handleStore(
+                $requestData['recruiter_id'],
+                $step->id,
+                $requestData['status_category_id'],
+            );
+
+            return response()->json([
+                'message' => 'Step and Status created successfully.',
+                'step' => $step->only(['id', 'recruiter_id', 'timeline_id']) + ['step_category' => $step->category->name],
+                'status' => $status->only(['id', 'recruiter_id', 'step_id']) + ['status_category' => $status->category->name],
+            ], 201);
+
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => 'Failed to create step.',
+                'error' => $e->getMessage()
+            ], 500);
+        }
     }
 }
