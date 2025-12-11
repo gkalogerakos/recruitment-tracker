@@ -29,8 +29,8 @@ class TimelineController extends Controller
 
             return response()->json([
                 'message' => 'Timeline and Candidate created successfully.',
-                'timeline_id' => $timeline->id,
-                'candidate_id' => $timeline->candidate_id,
+                'timeline' => $timeline->only(['id', 'recruiter_id', 'candidate_id']),
+                'candidate' => $newCandidate->only(['id', 'name', 'surname']),
             ], 201);
 
         } catch (\Exception $e) {
