@@ -2,9 +2,9 @@
 
 namespace App\Rules;
 
+use App\Models\Step;
 use Closure;
 use Illuminate\Contracts\Validation\ValidationRule;
-use App\Models\Step;
 
 class UniqueStepCategoryPerTimeline implements ValidationRule
 {
@@ -13,7 +13,7 @@ class UniqueStepCategoryPerTimeline implements ValidationRule
     /**
      * Create a new rule instance.
      *
-     * @param int $timelineId The ID of the timeline being checked.
+     * @param  int  $timelineId  The ID of the timeline being checked.
      * @return void
      */
     public function __construct(int $timelineId)
@@ -23,11 +23,6 @@ class UniqueStepCategoryPerTimeline implements ValidationRule
 
     /**
      * Validate the given attribute.
-     *
-     * @param  string  $attribute
-     * @param  mixed  $value
-     * @param Closure $fail
-     * @return void
      */
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
@@ -37,7 +32,7 @@ class UniqueStepCategoryPerTimeline implements ValidationRule
             ->exists();
 
         if ($exists) {
-            $fail("The step category has already been used in this timeline.");
+            $fail('The step category has already been used in this timeline.');
         }
     }
 }

@@ -28,7 +28,7 @@ class StoreTimelineRequest extends FormRequest
             'recruiter_id' => [
                 'required',
                 'integer',
-                'exists:recruiters,id' // Check if the recruiter_id exists
+                'exists:recruiters,id', // Check if the recruiter_id exists
             ],
             'candidate_name' => 'required|string',
             'candidate_surname' => 'required|string',
@@ -47,7 +47,6 @@ class StoreTimelineRequest extends FormRequest
             'recruiter_id.integer' => 'Recruiter id must be an integer.',
             'recruiter_id.exists' => 'Selected recruiter does not exist.',
 
-
             'candidate_name.required' => "Candidate's name is required.",
             'candidate_name.string' => "Candidate's name must be a string.",
 
@@ -59,8 +58,6 @@ class StoreTimelineRequest extends FormRequest
     /**
      * Handle a failed validation attempt.
      *
-     * @param  Validator  $validator
-     * @return void
      *
      * @throws HttpResponseException
      */
@@ -69,7 +66,7 @@ class StoreTimelineRequest extends FormRequest
 
         throw new HttpResponseException(response()->json([
             'message' => 'Validation failed for the timeline creation request.',
-            'errors' => $validator->errors()
+            'errors' => $validator->errors(),
         ], 422)); // Use HTTP 422 Unprocessable Entity
     }
 }

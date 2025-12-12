@@ -2,6 +2,14 @@
 
 namespace App\Providers;
 
+use App\Repositories\EloquentCandidateRepository;
+use App\Repositories\EloquentStatusRepository;
+use App\Repositories\EloquentStepRepository;
+use App\Repositories\EloquentTimelineRepository;
+use App\Repositories\Interfaces\CandidateRepositoryInterface;
+use App\Repositories\Interfaces\StatusRepositoryInterface;
+use App\Repositories\Interfaces\StepRepositoryInterface;
+use App\Repositories\Interfaces\TimelineRepositoryInterface;
 use App\Services\CandidateService;
 use App\Services\Interfaces\CandidateServiceInterface;
 use App\Services\Interfaces\StatusServiceInterface;
@@ -23,6 +31,10 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(CandidateServiceInterface::class, CandidateService::class);
         $this->app->bind(StepServiceInterface::class, StepService::class);
         $this->app->bind(StatusServiceInterface::class, StatusService::class);
+        $this->app->bind(StatusRepositoryInterface::class, EloquentStatusRepository::class);
+        $this->app->bind(StepRepositoryInterface::class, EloquentStepRepository::class);
+        $this->app->bind(TimelineRepositoryInterface::class, EloquentTimelineRepository::class);
+        $this->app->bind(CandidateRepositoryInterface::class, EloquentCandidateRepository::class);
 
     }
 

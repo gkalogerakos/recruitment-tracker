@@ -2,11 +2,11 @@
 
 namespace App\Services\Interfaces;
 
-
-
-use App\Models\Timeline;
+use Illuminate\Support\Collection;
 
 interface TimelineServiceInterface
 {
-    public function handleStore(int $recruiterId, int $candidateId): Timeline;
+    public function handleStore(int $recruiterId, int $candidateId): Collection;
+
+    public function handleShow(int $timeline_id): Collection;
 }

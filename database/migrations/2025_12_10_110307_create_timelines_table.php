@@ -20,7 +20,7 @@ return new class extends Migration
             // Foreign Key to Recruiters (The recruiter managing the timeline)
             $table->foreignId('recruiter_id')->constrained('recruiters');
 
-    $table->timestamps();
+            $table->timestamps();
         });
     }
 

@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests;
 
-use App\Rules\UniqueStepCategoryPerTimeline;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
@@ -30,12 +29,12 @@ class StoreStatusRequest extends FormRequest
             'recruiter_id' => [
                 'required',
                 'integer',
-                'exists:recruiters,id' // Check if the recruiter_id exists
+                'exists:recruiters,id', // Check if the recruiter_id exists
             ],
             'candidate_id' => [
                 'required',
                 'integer',
-                'exists:candidates,id' // Check if the candidate_id exists
+                'exists:candidates,id', // Check if the candidate_id exists
             ],
             'timeline_id' => [
                 'required',
@@ -52,7 +51,7 @@ class StoreStatusRequest extends FormRequest
             'status_category_id' => [
                 'required',
                 'integer',
-                'exists:status_categories,id' // Check if the status_category_id exists
+                'exists:status_categories,id', // Check if the status_category_id exists
             ],
         ];
     }
@@ -90,8 +89,6 @@ class StoreStatusRequest extends FormRequest
     /**
      * Handle a failed validation attempt.
      *
-     * @param Validator $validator
-     * @return void
      *
      * @throws HttpResponseException
      */
@@ -103,7 +100,7 @@ class StoreStatusRequest extends FormRequest
             'message' => 'Validation failed for the status creation request.',
 
             // 2. The detailed errors from the validator
-            'errors' => $validator->errors()
+            'errors' => $validator->errors(),
         ], 422)); // Use HTTP 422 Unprocessable Entity
     }
 }

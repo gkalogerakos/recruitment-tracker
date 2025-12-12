@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Timeline extends Model
@@ -12,14 +11,14 @@ class Timeline extends Model
         'recruiter_id',
     ];
 
-    // The Candidate associated with this Timeline (One-to-One)
+    // The Candidate associated with this Timeline
     public function candidate()
     {
         return $this->belongsTo(Candidate::class);
     }
 
     // The Recruiter managing this Timeline
-    public function manager()
+    public function recruiter()
     {
         return $this->belongsTo(Recruiter::class, 'recruiter_id');
     }

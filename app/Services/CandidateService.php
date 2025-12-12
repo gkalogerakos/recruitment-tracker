@@ -2,20 +2,24 @@
 
 namespace App\Services;
 
-
-
-
-use App\Models\Candidate;
+use App\Repositories\Interfaces\CandidateRepositoryInterface;
 use App\Services\Interfaces\CandidateServiceInterface;
+use Illuminate\Support\Collection;
 
 class CandidateService implements CandidateServiceInterface
 {
-    public function handleStore(string $name, string $surname): Candidate
+    private CandidateRepositoryInterface $candidateRepository;
+
+    public function __construct(CandidateRepositoryInterface $candidateRepository)
     {
-        return Candidate::create([
-            'name' => $name,
-            'surname' => $surname,
-        ]);
+        $this->candidateRepository = $candidateRepository;
+    }
+
+    public function handleStore(string $name, string $surname): Collection
+    {
+        $candidate = $this->candidateRepository->store($name, $surname);
+
+        return collect($candidate->only(['id', 'name', 'surname']));
 
     }
 }

@@ -2,11 +2,9 @@
 
 namespace App\Services\Interfaces;
 
-
-
-use App\Models\Candidate;
+use Illuminate\Support\Collection;
 
 interface CandidateServiceInterface
 {
-    public function handleStore(string $name, string $surname): Candidate;
+    public function handleStore(string $name, string $surname): Collection;
 }
