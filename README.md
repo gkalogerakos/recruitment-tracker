@@ -1,7 +1,7 @@
 # Recruitment Timeline Tracker API
 
 A RESTful API designed for tracking the candidate interview process built with **Laravel 12**.  
-This application manages the lifecycle of a candidate's journey **(Timeline, Steps, and Status History)** using a professional **Repository–Service** architecture.
+This application manages the lifecycle of a candidate's journey **(Timeline, Steps, and Status History)** using a professional **Repository–Service** architecture and **Unit Tests** using **PhpUnit**.
 
 ---
 
