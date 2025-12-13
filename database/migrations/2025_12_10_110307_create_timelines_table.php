@@ -14,11 +14,9 @@ return new class extends Migration
         Schema::create('timelines', function (Blueprint $table) {
             $table->id();
 
-            // Foreign Key to Candidates (One-to-One / One-to-Few)
-            $table->foreignId('candidate_id')->constrained()->unique();
+            $table->foreignId('candidate_id')->constrained()->onDelete('cascade');
 
-            // Foreign Key to Recruiters (The recruiter managing the timeline)
-            $table->foreignId('recruiter_id')->constrained('recruiters');
+            $table->foreignId('recruiter_id')->constrained('recruiters')->onDelete('cascade');
 
             $table->timestamps();
         });

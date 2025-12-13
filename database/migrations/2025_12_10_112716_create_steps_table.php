@@ -14,18 +14,14 @@ return new class extends Migration
         Schema::create('steps', function (Blueprint $table) {
             $table->id();
 
-            // Foreign Key to Timeline
-            $table->foreignId('timeline_id')->constrained();
+            $table->foreignId('timeline_id')->constrained()->onDelete('cascade');
 
-            // Foreign Key to StepCategory
             $table->foreignId('step_category_id')->constrained();
 
-            // Foreign Key to Recruiter who created the step
             $table->foreignId('recruiter_id')->constrained('recruiters');
 
             $table->timestamps();
 
-            // **CONSTRAINT:** Ensure a Step Category can only be used once per Timeline
             $table->unique(['timeline_id', 'step_category_id']);
         });
     }

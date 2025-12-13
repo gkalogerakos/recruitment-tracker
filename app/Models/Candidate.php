@@ -12,8 +12,8 @@ class Candidate extends Model
     ];
 
     // A Candidate has one Timeline
-    public function timeline()
+    public function timelines()
     {
-        return $this->hasOne(Timeline::class);
+        return $this->hasMany(Timeline::class);
     }
 }

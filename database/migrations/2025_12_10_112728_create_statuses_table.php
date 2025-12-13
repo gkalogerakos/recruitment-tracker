@@ -14,13 +14,10 @@ return new class extends Migration
         Schema::create('statuses', function (Blueprint $table) {
             $table->id();
 
-            // Foreign Key to the Step
-            $table->foreignId('step_id')->constrained();
+            $table->foreignId('step_id')->constrained()->onDelete('cascade');
 
-            // Foreign Key to StatusCategory
             $table->foreignId('status_category_id')->constrained();
 
-            // Foreign Key to Recruiter who created the status
             $table->foreignId('recruiter_id')->constrained('recruiters');
 
             $table->timestamps();
